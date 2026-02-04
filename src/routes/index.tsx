@@ -1,43 +1,42 @@
-import * as fs from 'node:fs';
+import * as fs from "node:fs";
 import {
   queryOptions,
   useMutation,
-  useQuery,
   useQueryClient,
   useSuspenseQuery,
-} from '@tanstack/react-query';
-import { createFileRoute, useRouter } from '@tanstack/react-router';
-import { createServerFn } from '@tanstack/react-start';
+} from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 
-const filePath = 'count.txt';
+const filePath = "count.txt";
 
 async function readCount() {
   return parseInt(
-    await fs.promises.readFile(filePath, 'utf-8').catch(() => '0'),
+    await fs.promises.readFile(filePath, "utf-8").catch(() => "0"),
   );
 }
 
 const getCount = createServerFn({
-  method: 'GET',
+  method: "GET",
 }).handler(() => {
   return readCount();
 });
 
 const countQuery = queryOptions({
-  queryKey: ['count'],
+  queryKey: ["count"],
   queryFn: () => getCount(),
 });
 
-const updateCount = createServerFn({ method: 'POST' })
+const updateCount = createServerFn({ method: "POST" })
   .inputValidator((d: number) => d)
   .handler(async ({ data }) => {
-    console.log('hello');
+    console.log("hello");
     const count = await readCount();
     await fs.promises.writeFile(filePath, `${count + data}`);
-    console.log('done');
+    console.log("done");
   });
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: Home,
   loader: async ({ context }) => {
     context.queryClient.ensureQueryData(countQuery);
@@ -52,7 +51,7 @@ function Home() {
   const { mutate, isPending } = useMutation({
     mutationFn: (amount: number) => updateCount({ data: amount }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['count'] });
+      queryClient.invalidateQueries({ queryKey: ["count"] });
     },
   });
 

@@ -19,7 +19,8 @@
     "format:check": "prettier .",
     "format:write": "prettier . --write",
     "lint:check": "eslint .",
-    "lint:write": "eslint . --fix"
+    "lint:write": "eslint . --fix",
+    "migrations:local": "wrangler d1 migrations apply dnd-app --local"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
     "@tanstack/react-router": "^1.157.17",
     "@tanstack/react-router-ssr-query": "^1.157.18",
     "@tanstack/react-start": "^1.157.17",
+    "drizzle-orm": "^0.45.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
@@ -40,6 +42,7 @@
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9.39.2",
     "globals": "^17.3.0",
     "prettier": "^3.8.1",
