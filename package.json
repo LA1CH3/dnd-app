@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
     "cf-typegen": "wrangler types",
-    "format:check": "prettier .",
+    "format:check": "prettier . --check",
     "format:write": "prettier . --write",
     "lint:check": "eslint .",
     "lint:write": "eslint . --fix",
