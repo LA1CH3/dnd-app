@@ -107,9 +107,7 @@ function LoginForm() {
               placeholder="e.g. XK7M2P"
               maxLength={6}
               value={field.state.value}
-              onChange={(e) =>
-                field.handleChange(e.target.value.toUpperCase())
-              }
+              onChange={(e) => field.handleChange(e.target.value.toUpperCase())}
             />
           )}
         </form.Field>
